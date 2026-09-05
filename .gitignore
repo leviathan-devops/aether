@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.aether-capture/
+*.log
+
+# runtime-generated graph dbs (rebuild via the machinery)
+MASTER_CONTEXT/knowledge-graph/graph.db
+*.db

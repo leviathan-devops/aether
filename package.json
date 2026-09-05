@@ -1,0 +1,29 @@
+{
+  "name": "aether-machine-boilerplate",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "bun build src/index.ts --outdir dist --target bun --format esm --bundle",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@earendil-works/pi-agent-core": "0.84.2",
+    "@earendil-works/pi-ai": "0.84.2",
+    "@opencode-ai/plugin": "^1.16.0",
+    "peggy": "^4.2.0",
+    "sql.js": "^1.14.1",
+    "typescript": "^6.0.3",
+    "wink-eng-lite-web-model": "^1.8.1",
+    "wink-nlp": "^2.4.0",
+    "xstate": "^5.32.1",
+    "zod": "4.1.8",
+    "@modelcontextprotocol/sdk": "^1.30.0"
+  },
+  "devDependencies": {
+    "fast-check": "^3.23.2",
+    "tsx": "^4.22.4",
+    "@types/bun": "^1.4.1",
+    "vitest": "^2.1.8"
+  }
+}

@@ -1,0 +1,34 @@
+profileVersion: 1
+project:
+  name: trident-v443
+  root: "/home/leviathan/OPENCODE_WORKSPACE/Shared Workspace Context/Trident_Agent/Active_Projects/v4.4.3"
+  languages: [typescript]
+  entryPoints: [src/index.ts]
+  build: "bun build src/index.ts --outdir dist --target bun --format esm --bundle"
+  test: "bash scripts/preflight.sh"
+graph:
+  substrate: corbell
+  rebuild: false
+  scope: [src]
+  excludes: ["**/__tests__/**", "node_modules", "dist"]
+rules:
+  corpus: [MASTER_CONTEXT/corpus/rules.md]
+  bindings: {}
+pipeline:
+  stages:
+    - id: state-isolation-contract
+      entry: src/poseidon/poseidon-state.ts
+      contract: "SESSION STATE IS PER-SESSION SQLITE ROWS - NO SHARED JSON - NO CROSS-PROJECT DEFAULT-KEY ROUTING - NO PROCESS.CWD ANCHORING"
+    - id: abort-writes-terminal
+      entry: src/tools/trident-poseidon.ts
+      contract: "ABORT WRITES THE TERMINAL PHASE TO THE ENFORCER'S STORE - TERMINALS ARE FRESH-STARTABLE - ENFORCEMENT NEVER OUTLIVES ITS LOOP"
+    - id: hunt-singleton-and-warm-index
+      entry: src/subagents/trident-bug-hunter/tools/bug-hunt.ts
+      contract: "HUNTS ARE SINGLETONS (HUNT_ALREADY_RUNNING ON SECOND CALLER) - THE MINUTES-LONG GRAPH BUILD NEVER RUNS INSIDE A TOOL CALL WHEN graph.rebuild IS FALSE"
+    - id: report-integrity
+      entry: src/subagents/trident-bug-hunter/harness/report.ts
+      contract: "THE SEALED REPORT OPENS WITH THE REPORT TITLE AND CONTAINS ZERO META-COMMENTARY - ZERO RULES COMPILED OR ZERO COVERAGE IS INCONCLUSIVE NOT CLEAN"
+history:
+  failureLogs: [DEBUG_LOG.md, host-test-failure-log.md, MASTER_CONTEXT/corpus/rules.md]
+awareness:
+  docs: [Context_Management/COMPACTION_SURVIVAL.md, host-test-failure-log.md]

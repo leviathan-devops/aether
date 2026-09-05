@@ -1,0 +1,21 @@
+{
+  "ruleId": "P6",
+  "file": "src/engine.ts",
+  "line": 12,
+  "description": "the price-anchored E2 comparator — abs(open - level) = 1.504 over the 1.0 ceiling (the C26.10 11-site class, the DXY 101.296 anchor)",
+  "sourceFile": "engine.ts",
+  "graph": {
+    "nodes": [
+      {
+        "id": "fn:priceAnchor",
+        "kind": "function",
+        "name": "priceAnchor",
+        "file": "src/engine.ts",
+        "line": 12,
+        "lineage": "CODE_DERIVED",
+        "source": "fixture:fire",
+        "data": { "open": 102.8, "level": 101.296, "comparator": 1.504 }
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+profileVersion: 1
+project:
+  name: fixture-profile
+  root: /workspace/fixture-profile
+  languages: [typescript]
+  entryPoints: [src/engine.ts]
+  build: "bun build src/engine.ts"
+  test: "echo ok"
+graph:
+  substrate: corbell
+  scope: [src]
+  excludes: []
+rules:
+  corpus: [corpus/rules.md]
+  bindings: {}
+pipeline:
+  stages:
+    - id: price-anchor
+      entry: src/engine.ts
+      contract: "NOTHING SHOULD BE PRICE ANCHORED EVER"
+history:
+  failureLogs: []
+awareness:
+  docs: []

@@ -1,0 +1,20 @@
+{
+  "anchor": "gold-5-of-5",
+  "file": "src/engine.ts",
+  "description": "the zone-anchored E2 designation — the Monday gold 5/5 checkpoint, the operator's known-good state: the comparator is zone-derived, under the 1.0 ceiling",
+  "sourceFile": "engine.ts",
+  "graph": {
+    "nodes": [
+      {
+        "id": "fn:priceAnchor",
+        "kind": "function",
+        "name": "priceAnchor",
+        "file": "src/engine.ts",
+        "line": 13,
+        "lineage": "CODE_DERIVED",
+        "source": "fixture:golden",
+        "data": { "open": 100.4, "level": 100.2, "comparator": 0.2 }
+      }
+    ]
+  }
+}
