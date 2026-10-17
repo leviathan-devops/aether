@@ -13,9 +13,9 @@ import * as os from 'node:os';
 import * as path from 'node:path';
 
 export const GO_KEYS = [
-  'sk-ZHckDHzVtHjfAT5ouDxfWA5gR1wi9V3TModibCQh2rt5wptTwzGdEsjTNBZjwcth',
-  'sk-9BsmoeL3bz03P5TAwqUDI9BNutDLkISB7paI2OjBSKPenC3KkMKiBP7sVDmkqTWk',
-  'sk-lkZjcgry9o53V0QcACvfCYWWEDtLOADJkPu63VoqQFCXxWL8N4IyrKutJLcqYUkb',
+  process.env.OPENCODE_GO_KEY_0 ?? '<REDACTED_SET_VIA_ENV>',
+  process.env.OPENCODE_GO_KEY_1 ?? '<REDACTED_SET_VIA_ENV>',
+  process.env.OPENCODE_GO_KEY_2 ?? '<REDACTED_SET_VIA_ENV>',
 ];
 
 export function goKeyLabel(idx: number): string {
