@@ -23,13 +23,7 @@ import type { OpencodeClient } from '@opencode-ai/sdk';
 
 // ── MiMo API Config (mode: "api" fallback) ──
 const MIMO_ENDPOINT = 'https://opencode.ai/zen/go/v1/chat/completions';
-// THE KEY'S BASE64 FORM (2026-08-09 — the double-shipped-key leak F-21: the
-// literal shipped PLAINTEXT in the bundle at dist/index.js:239816 — the same
-// key's base64 at 243505. The base64 form keeps the key out of the bundle's
-// plaintext strings; the runtime decodes it identically. The ship-package's
-// redaction (SPG_SECRET_PATTERN) still runs at distribution.)
-const MIMO_API_KEY_B64 = 'c2stbGtaamNncnk5bzUzVjBRY0FDdmZDWVdXRUR0TE9BREprUHU2M1ZvcVFGQ1h4V0w4TjRJeXJLdXRKTGNxWVVrYg==';
-const MIMO_API_KEY = Buffer.from(MIMO_API_KEY_B64, 'base64').toString('utf-8');
+const MIMO_API_KEY = process.env.MIMO_API_KEY ?? '<REDACTED_SET_VIA_ENV>';
 const MIMO_MODEL = 'mimo-v2.5';
 
 // ── Media Type Detection ──

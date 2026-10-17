@@ -11,13 +11,13 @@ export const AETHER_BASE_URL = 'https://opencode.ai/zen/go/v1';
 // upstream, so the mandate died pre-ledger with zero console trace. The seed
 // therefore runs AT MODULE LOAD here (provider.ts is imported by probe,
 // runner, agent, and the barrel alike), idempotently: an exported env var
-// ALWAYS wins; the base64 constant only fills a completely unset slot.
-const GO_KEY_B64 = 'c2stWkhja0RIelZ0SGpmQVQ1b3VEeGZXQTVnUjF3aTlWM1RNb2RpYkNRaDJydDV3cHRUd3pHZEVzalROQlpqd2N0aA==';
+// ALWAYS wins; OPENCODE_GO_KEY_B64 fills a completely unset slot.
+const GO_KEY_B64 = process.env.OPENCODE_GO_KEY_B64;
 export function seedAetherProviderEnv(): void {
   if (!process.env.OPENCODE_GO_API_KEY && process.env.OPENCODE_API_KEY) {
     process.env.OPENCODE_GO_API_KEY = process.env.OPENCODE_API_KEY;
   }
-  if (!process.env.OPENCODE_GO_API_KEY) {
+  if (!process.env.OPENCODE_GO_API_KEY && GO_KEY_B64) {
     process.env.OPENCODE_GO_API_KEY = Buffer.from(GO_KEY_B64, 'base64').toString('utf-8');
   }
 }

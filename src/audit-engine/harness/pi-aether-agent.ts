@@ -68,15 +68,13 @@ const RETRYABLE_RE = /429|rate.?limit|too many|quota|5\d\d/i;
 const MAX_ROUNDS = 3;
 const MIN_MANDATORY_ROUNDS = 2;
 
-// THE SINGLE KEY (opencode-go — operator hardcode 2026-08-24: ONLY muse-spark
-// on opencode-go, no fallback pool). Base64-encoded seed — env ALWAYS wins.
-const OPENCODE_GO_KEY_B64 = 'c2stWkhja0RIelZ0SGpmQVQ1b3VEeGZXQTVnUjF3aTlWM1RNb2RpYkNRaDJydDV3cHRUd3pHZEVzalROQlpqd2N0aA==';
+const OPENCODE_GO_KEY_B64 = process.env.OPENCODE_GO_KEY_B64;
 
 export interface ChainEntry {
   provider: string;
   modelId: string;
-  /** THE GO KEY INDEX (the v5 pool wiring, ported 2026-08-30): 0/1/2 — each
-   *  rung IS one embedded key; the pool decides dead/alive per key. */
+  /** THE GO KEY INDEX (the v5 pool wiring, ported 2026-08-30): 0/1/2. Each
+   *  rung is one env key. The pool decides dead or alive per key. */
   goKeyIdx: number;
 }
 
@@ -122,10 +120,10 @@ export class AetherAgent {
     this.ledger = opts?.ledger ?? new RpmLedger(opts?.ledgerOpts?.id ?? 'aether-stepx-' + Date.now());
     // THE 3-KEY CHAIN (the v5 pool wiring, ported 2026-08-30 — the operator:
     // "copy exactly how the fallback chain was wired in wave-manager-generate-
-    // SHIP-APPROVED-v5"): each rung IS one embedded key (goKeyIdx 0/1/2); the
+    // SHIP-APPROVED-v5"): each rung is one env key (goKeyIdx 0/1/2); the
     // pool gates dead keys, a 429 dead-marks the key with its OWN parsed
     // window and the chain falls to the next key. Env key stays a fallback.
-    if (!process.env.OPENCODE_API_KEY) process.env.OPENCODE_API_KEY = Buffer.from(OPENCODE_GO_KEY_B64, 'base64').toString('utf-8');
+    if (!process.env.OPENCODE_API_KEY && OPENCODE_GO_KEY_B64) process.env.OPENCODE_API_KEY = Buffer.from(OPENCODE_GO_KEY_B64, 'base64').toString('utf-8');
 
     this.models = createModels();
     this.models.setProvider(this.opencodeGoProvider());

@@ -6,3 +6,9 @@ dist/
 # runtime-generated graph dbs (rebuild via the machinery)
 MASTER_CONTEXT/knowledge-graph/graph.db
 *.db
+
+.env
+.env.*
+!.env.example
+*.pem
+*.key
